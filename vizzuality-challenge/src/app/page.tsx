@@ -1,11 +1,13 @@
-import Image from 'next/image';
-import Map from './mapbox';
 import { MainView } from './MainView';
+import { getCityBikeNetworks } from '@/lib/getCityBikeNetworks';
+import { CityBikeNetworkProvider } from '@/context/CityBikeNetworkContext';
 
 export default async function Home() {
-	const response = await fetch('https://api.citybik.es/v2/networks');
-	const data = await response.json();
-	//console.log(data);
+	const cityBikeNetworks = await getCityBikeNetworks();
 
-	return <MainView />;
+	return (
+		<CityBikeNetworkProvider cityBikeNetworksInitialValue={cityBikeNetworks}>
+			<MainView />
+		</CityBikeNetworkProvider>
+	);
 }

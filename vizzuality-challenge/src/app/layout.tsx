@@ -3,6 +3,7 @@ import { Poppins as FontSans } from 'next/font/google';
 import type { Metadata } from 'next';
 import { cn } from '@/lib/utils';
 import './globals.css';
+import Providers from './providers';
 
 const fontSans = FontSans({
 	subsets: ['latin'],
@@ -26,7 +27,7 @@ export default function RootLayout({
 			<body
 				className={cn('bg-background font-sans antialiased', fontSans.variable)}
 			>
-				{children}
+				<Providers>{children}</Providers>
 			</body>
 		</html>
 	);
