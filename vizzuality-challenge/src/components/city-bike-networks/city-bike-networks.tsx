@@ -16,7 +16,8 @@ export function CityBikeNetworks() {
 	const searchParams = useSearchParams();
 
 	const currentPage = Number(searchParams.get('page')) || 1;
-	const itemsPerPage = 10;
+	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+	const endIndex = startIndex + ITEMS_PER_PAGE;
 
 	const handlePageChange = useCallback(
 		(newPage: number) => {
@@ -27,8 +28,6 @@ export function CityBikeNetworks() {
 		[searchParams, router]
 	);
 
-	const startIndex = (currentPage - 1) * itemsPerPage;
-	const endIndex = startIndex + itemsPerPage;
 	return (
 		<>
 			<ul>
@@ -41,7 +40,7 @@ export function CityBikeNetworks() {
 			<PaginationControls
 				currentPage={currentPage}
 				totalItems={cityBikeNetworks.length}
-				itemsPerPage={itemsPerPage}
+				itemsPerPage={ITEMS_PER_PAGE}
 				onPageChange={handlePageChange}
 			/>
 		</>
