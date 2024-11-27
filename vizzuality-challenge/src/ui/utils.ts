@@ -1,27 +1,50 @@
-import countries from '@/lib/countries/countries.json';
+import countriesData from '@/lib/countries/countries.json';
 
-export function getCountryName(code: string) {
-	const name = countries[code as keyof typeof countries];
+type CountriesMap = {
+	[key: string]: string;
+};
+
+type CompanyVisibilityConfig = {
+	maxCharsPerLine: number;
+	visibleCompaniesLimit: number;
+};
+
+const countries = countriesData as CountriesMap;
+
+export const getNormalizedCountryName = (code: string) => {
+	const normalizedCode = code.trim().toUpperCase();
+
+	const name = countries[normalizedCode];
 
 	if (!name) {
-		console.warn('Unhandled country code:', code);
-		return '';
+		console.warn(
+			`Country code "${normalizedCode}" not found in countries dictionary. ` +
+				'Please verify the code is correct or add it to the dictionary.'
+		);
+		return normalizedCode;
 	}
 
 	return name;
-}
+};
 
-export function getAdditionalCompaniesCount(company: string[]): number | null {
-	// This is currently a rough estimate:
-	const maxChars = 26;
+export const getCompaniesCount = (
+	companies: Array<string>,
+	config: CompanyVisibilityConfig = {
+		maxCharsPerLine: 26,
+		visibleCompaniesLimit: 2,
+	}
+): number | null => {
+	const { maxCharsPerLine, visibleCompaniesLimit } = config;
 
-	// Checks if only first company name is going to be visible
-	if (company.length > 1 && company[0].length > maxChars)
-		return company.length - 1;
+	if (companies.length <= 1) {
+		return null;
+	}
 
-	// 2 company names are going to be (partly) visible, so minus 2
-	if (company.length > 1) return company.length - 2;
+	if (companies[0].length > maxCharsPerLine) {
+		return companies.length - 1;
+	}
 
-	// company length should be 0 or 1 at this point
-	return null;
-}
+	return companies.length > visibleCompaniesLimit
+		? companies.length - visibleCompaniesLimit
+		: null;
+};

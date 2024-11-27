@@ -1,5 +1,4 @@
-import { getAdditionalCompaniesCount, getCountryName } from '@/ui/utils';
-import { Location } from '@/types';
+import { getCompaniesCount, getNormalizedCountryName } from '@/ui/utils';
 import Link from 'next/link';
 import CompanyInfo from './company-info/company-info';
 import LocationInfo from './location-info/location-info';
@@ -14,8 +13,8 @@ export function CityBikeNetworkCard({
 	cityBikeNetwork,
 }: CityBikeNetworkCardProps) {
 	const { id, company, location, name } = cityBikeNetwork;
-	const additionalCompaniesCount = getAdditionalCompaniesCount(company);
-	const countryName = getCountryName(location.country);
+	const additionalCompaniesCount = getCompaniesCount(company);
+	const countryName = getNormalizedCountryName(location.country);
 
 	return (
 		<Link
@@ -31,7 +30,7 @@ export function CityBikeNetworkCard({
 				<LocationInfo location={location} />
 				<CompanyInfo
 					companies={company}
-					additionalCount={additionalCompaniesCount || 0}
+					additionalCount={additionalCompaniesCount ?? 0}
 				/>
 
 				<DetailsButton />
