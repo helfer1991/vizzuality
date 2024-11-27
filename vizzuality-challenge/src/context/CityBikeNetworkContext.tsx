@@ -12,6 +12,8 @@ type CityBikeNetworkContext = {
 	cityBikeNetworksInitialValue: Array<CityBikeNetwork>;
 	cityBikeNetworks: Array<CityBikeNetwork>;
 	setCityBikeNetworks: Dispatch<SetStateAction<Array<CityBikeNetwork>>>;
+	currentPage: number;
+	setCurrentPage: Dispatch<SetStateAction<number>>;
 };
 
 export const CityBikeNetworkContext = createContext<CityBikeNetworkContext>(
@@ -29,6 +31,7 @@ export const CityBikeNetworkProvider: React.FC<
 	const [cityBikeNetworks, setCityBikeNetworks] = useState<
 		Array<CityBikeNetwork>
 	>(cityBikeNetworksInitialValue);
+	const [currentPage, setCurrentPage] = useState<number>(0);
 
 	return (
 		<CityBikeNetworkContext.Provider
@@ -36,6 +39,8 @@ export const CityBikeNetworkProvider: React.FC<
 				cityBikeNetworksInitialValue,
 				cityBikeNetworks,
 				setCityBikeNetworks,
+				currentPage,
+				setCurrentPage,
 			}}
 		>
 			{children}
