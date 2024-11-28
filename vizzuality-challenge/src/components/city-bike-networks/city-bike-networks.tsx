@@ -1,14 +1,10 @@
 'use client';
 import { CityBikeNetworkContext } from '@/context/CityBikeNetworkContext';
-import { Suspense, useContext, useEffect, useCallback } from 'react';
+import { useContext, useCallback } from 'react';
 import { CityBikeNetworkCard } from '@/ui/city-bike-network-card/city-bike-network-card';
 import { PaginationControls } from '../pagination/pagination';
 import { ITEMS_PER_PAGE } from './constants';
 import { useRouter, useSearchParams } from 'next/navigation';
-
-interface Props {
-	onPaginationChange: () => void;
-}
 
 export function CityBikeNetworks() {
 	const { cityBikeNetworks } = useContext(CityBikeNetworkContext);

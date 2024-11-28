@@ -21,3 +21,8 @@ export type License = {
 	name: string;
 	url: string;
 };
+
+export type CountryComboboxItem = {
+	label: string;
+	value: string;
+};
