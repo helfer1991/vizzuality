@@ -23,7 +23,6 @@ export function Search({
 
 	const handleSubmit = (e: FormEvent): void => {
 		e.preventDefault();
-
 		onSearch(searchQuery, filterValue);
 	};
 

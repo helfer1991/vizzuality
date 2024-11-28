@@ -59,7 +59,6 @@ export function PaginationControls({
 					</PaginationItem>
 				)}
 
-				{/* Page numbers */}
 				{visiblePages.map((page) => (
 					<PaginationItem key={page}>
 						<PaginationLink

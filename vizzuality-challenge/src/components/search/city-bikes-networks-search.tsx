@@ -1,6 +1,6 @@
 'use client';
 import { CityBikeNetworkContext } from '@/context/CityBikeNetworkContext';
-import { filterCityBikeNetworksBySearchQuery } from './utils';
+import { getFilteredNetworks } from './utils';
 import countries from '@/lib/countries/countriesLabel.json';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
@@ -17,18 +17,14 @@ export function CityBikesNetworksSearch() {
 		const searchParams = new URLSearchParams(window.location.search);
 		const query = decodeURIComponent(searchParams.get('search') || '');
 		const countryFilter = searchParams.get('country');
-		let result = filterCityBikeNetworksBySearchQuery(
+
+		const filteredNetworks = getFilteredNetworks(
 			cityBikeNetworksInitialValue,
-			query
+			query,
+			countryFilter
 		);
 
-		if (countryFilter) {
-			result = result.filter(
-				(network: any) => network.location.country === countryFilter
-			);
-		}
-
-		setCityBikeNetworks(result);
+		setCityBikeNetworks(filteredNetworks);
 	}, [params, cityBikeNetworksInitialValue, setCityBikeNetworks]);
 
 	const handleOnSearch = (query: string, countryFilter?: string) => {

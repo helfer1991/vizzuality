@@ -3,7 +3,7 @@ import type { CityBikeNetwork } from '@/types';
 
 const indexCache = new WeakMap<Array<CityBikeNetwork>, FlexSearch.Index>();
 
-export const filterCityBikeNetworksBySearchQuery = (
+const filterCityBikeNetworksBySearchQuery = (
 	networks: Array<CityBikeNetwork>,
 	query: string
 ): Array<CityBikeNetwork> => {
@@ -31,4 +31,20 @@ export const filterCityBikeNetworksBySearchQuery = (
 
 	const resultIndices = index.search(query) as Array<number>;
 	return resultIndices.map((idx) => networks[idx as number]);
+};
+
+export const getFilteredNetworks = (
+	networks: Array<CityBikeNetwork>,
+	searchQuery: string,
+	countryFilter?: string | null
+): Array<CityBikeNetwork> => {
+	let filtered = filterCityBikeNetworksBySearchQuery(networks, searchQuery);
+
+	if (countryFilter) {
+		filtered = filtered.filter(
+			(network) => network.location.country === countryFilter
+		);
+	}
+
+	return filtered;
 };
