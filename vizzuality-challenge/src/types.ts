@@ -26,3 +26,22 @@ export type CountryComboboxItem = {
 	label: string;
 	value: string;
 };
+
+export type Station = {
+	empty_slots: number;
+	extra: Extra;
+	free_bikes: number;
+	id: string;
+	latitude: number;
+	longitude: number;
+	name: string;
+	timestamp: string;
+};
+
+export type Extra = {
+	number: number;
+	reviews: number;
+	score: number;
+	status: string;
+	uid: string;
+};
