@@ -46,19 +46,28 @@ export function getGeoJsonSource(
 	};
 }
 
-export function getGeoJsonSourceFromStations(
-	stations: Station[]
-): GeoJSON.FeatureCollection {
+export function getGeoJsonSourceFromStations(stations: Station[]) {
 	return {
 		type: 'FeatureCollection',
-		features: stations.map((s) => ({
+		features: stations.map((station) => ({
 			type: 'Feature',
-			properties: {
-				description: `<div class="text-toreabay-800 text-base leading-7 mb-2">${s.name}</div><ul><li>Free bikes <strong>${s.free_bikes}</strong></li><li>Empty slots <strong>${s.empty_slots}</strong></ul>`,
-			},
 			geometry: {
 				type: 'Point',
-				coordinates: [s.longitude, s.latitude],
+				coordinates: [station.longitude, station.latitude],
+			},
+			properties: {
+				name: station.name,
+				freeBikes: station.free_bikes,
+				emptySlots: station.empty_slots,
+				description: `
+          <div class="p-2">
+            <h3 class="font-semibold mb-2">${station.name}</h3>
+            <div class="text-sm">
+              <p>Free bikes: ${station.free_bikes}</p>
+              <p>Empty slots: ${station.empty_slots}</p>
+            </div>
+          </div>
+        `,
 			},
 		})),
 	};

@@ -45,3 +45,13 @@ export type Extra = {
 	status: string;
 	uid: string;
 };
+
+export type CityBikeNetworkStations = {
+	company: Array<string>;
+	href: string;
+	id: string;
+	location: Location;
+	name: string;
+	source: string;
+	stations: Array<Station>;
+};

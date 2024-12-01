@@ -3,7 +3,10 @@ import { CycleMapLogo } from './cycle-map-logo';
 export function MainViewHeader() {
 	return (
 		<header>
-			<div className='flex gap-0.5'>
+			<div
+				aria-label='CycleMap Logo'
+				className='flex gap-0.5'
+			>
 				<CycleMapLogo />
 				<span className='font-semibold text-xl text-grenadier-400'>
 					CycleMap

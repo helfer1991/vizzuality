@@ -13,11 +13,11 @@ import { CustomZoomControl, getCenterCoordinates } from './map-zoom';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
-interface MapComponentProps {
-	stations?: Station[];
-	networks?: CityBikeNetwork[];
+type MapComponentProps = {
+	stations?: Array<Station>;
+	networks?: Array<CityBikeNetwork>;
 	onStationClick?: (e: mapboxgl.MapMouseEvent & mapboxgl.MapEvent) => void;
-}
+};
 
 export function MapComponent({
 	stations,
@@ -31,7 +31,7 @@ export function MapComponent({
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current!,
 			style: mapStyle as any,
-			center: stations ? getCenterCoordinates(stations) : [-71.363, 44.475],
+			center: stations ? getCenterCoordinates(stations) : [44, -8],
 			zoom: stations ? 9 : 2,
 			projection: {
 				name: 'mercator',
@@ -126,22 +126,71 @@ export function StationsMap({ stations }: { stations: Station[] }) {
 			return;
 		}
 
+		const existingPopups = document.getElementsByClassName('mapboxgl-popup');
+		if (existingPopups.length) {
+			existingPopups[0].remove();
+		}
+
 		const coordinates = feature.geometry.coordinates.slice() as [
 			number,
 			number
 		];
-		const description = feature.properties?.description;
+		const name = 'Name';
+		const freeBikes = 4;
+		const emptySlots = 0;
 
-		while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-			coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-		}
+		// Create styled popup content
+		const popupContent = `
+      <div class="p-4 min-w-[200px]">
+        <h3 class="text-sm font-medium mb-3">
+          ${name}
+        </h3>
+        <div class="space-y-2">
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span>Bikes</span>
+              <span>${freeBikes}</span>
+            </div>
+            <div class="w-full h-1 rounded-full bg-green-500"></div>
+          </div>
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span>Slots</span>
+              <span>${emptySlots}</span>
+            </div>
+            <div class="w-full h-1 rounded-full bg-red-500"></div>
+          </div>
+        </div>
+      </div>
+    `;
 
-		if (description) {
-			new mapboxgl.Popup()
-				.setLngLat(coordinates)
-				.setHTML(description)
-				.addTo(e.target as mapboxgl.Map);
-		}
+		// Add custom popup styles
+		const style = document.createElement('style');
+		style.textContent = `
+      .mapboxgl-popup-content {
+        border-radius: 8px;
+        padding: 0;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      }
+      .mapboxgl-popup-close-button {
+        display: none;
+      }
+      .mapboxgl-popup-tip {
+        border-top-color: white;
+      }
+    `;
+		document.head.appendChild(style);
+
+		// Create and add popup
+		new mapboxgl.Popup({
+			closeButton: false,
+			closeOnClick: true,
+			offset: [0, -10],
+			className: 'station-popup',
+		})
+			.setLngLat(coordinates)
+			.setHTML(popupContent)
+			.addTo(e.target as mapboxgl.Map);
 	};
 
 	return (
