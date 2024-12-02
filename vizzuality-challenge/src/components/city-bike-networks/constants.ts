@@ -1,1 +1,1 @@
-export const ITEMS_PER_PAGE = 7;
+export const NETWORKS_PER_PAGE = 7;

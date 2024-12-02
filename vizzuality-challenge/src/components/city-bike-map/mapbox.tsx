@@ -26,13 +26,16 @@ export function MapComponent({
 }: MapComponentProps) {
 	const mapContainer = useRef(null);
 	const map = useRef<mapboxgl.Map | null>(null);
+	const sourceLoaded = useRef(false);
 
 	useEffect(() => {
+		if (map.current) return;
+
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current!,
 			style: mapStyle as any,
-			center: stations ? getCenterCoordinates(stations) : [44, -8],
-			zoom: stations ? 9 : 2,
+			center: stations ? getCenterCoordinates(stations) : [-8.6291, 41.1579],
+			zoom: stations ? 9 : 4,
 			projection: {
 				name: 'mercator',
 				center: [0, 30],
@@ -41,18 +44,16 @@ export function MapComponent({
 		});
 
 		map.current?.on('load', function () {
-			const source = stations
-				? getGeoJsonSourceFromStations(stations)
-				: getGeoJsonSource(networks || []);
+			if (!sourceLoaded.current) {
+				const source = stations
+					? getGeoJsonSourceFromStations(stations)
+					: getGeoJsonSource(networks || []);
 
-			if (!map.current?.getSource('networks')) {
 				map.current?.addSource('networks', {
 					type: 'geojson',
 					data: source,
 				} as mapboxgl.GeoJSONSourceSpecification);
-			}
 
-			if (!map.current?.getLayer('networks')) {
 				map.current?.addLayer({
 					id: 'networks',
 					type: 'circle',
@@ -64,6 +65,8 @@ export function MapComponent({
 						'circle-stroke-color': 'hsla(19, 88%, 61%, 1)',
 					},
 				});
+
+				sourceLoaded.current = true;
 			}
 
 			if (onStationClick) {
@@ -83,21 +86,22 @@ export function MapComponent({
 
 		return () => {
 			map.current?.remove();
+			map.current = null;
+			sourceLoaded.current = false;
 		};
-	}, [stations, networks, onStationClick]);
+	}, []);
 
 	useEffect(() => {
-		if (
-			!map.current ||
-			(stations && stations.length === 0) ||
-			(networks && networks.length === 0)
-		)
-			return;
+		if (!map.current || !sourceLoaded.current) return;
 
-		const padding = 40;
-		map.current?.fitBounds(getBounds(stations || networks || []), {
-			padding: { top: padding, right: padding, bottom: padding, left: padding },
-		});
+		const source = map.current.getSource('networks') as mapboxgl.GeoJSONSource;
+		if (source) {
+			const newData = stations
+				? getGeoJsonSourceFromStations(stations)
+				: getGeoJsonSource(networks || []);
+
+			source.setData(newData);
+		}
 	}, [stations, networks]);
 
 	return (

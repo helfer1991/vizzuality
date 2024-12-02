@@ -3,7 +3,7 @@ import { CityBikeNetworkContext } from '@/context/CityBikeNetworkContext';
 import { useContext, useCallback } from 'react';
 import { CityBikeNetworkCard } from '@/ui/city-bike-network-card/city-bike-network-card';
 import { PaginationControls } from '../pagination/pagination';
-import { ITEMS_PER_PAGE } from './constants';
+import { NETWORKS_PER_PAGE } from './constants';
 import { useRouter, useSearchParams } from 'next/navigation';
 
 export function CityBikeNetworks() {
@@ -12,8 +12,8 @@ export function CityBikeNetworks() {
 	const searchParams = useSearchParams();
 
 	const currentPage = Number(searchParams.get('page')) || 1;
-	const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-	const endIndex = startIndex + ITEMS_PER_PAGE;
+	const startIndex = (currentPage - 1) * NETWORKS_PER_PAGE;
+	const endIndex = startIndex + NETWORKS_PER_PAGE;
 
 	const handlePageChange = useCallback(
 		(newPage: number) => {
@@ -36,7 +36,7 @@ export function CityBikeNetworks() {
 			<PaginationControls
 				currentPage={currentPage}
 				totalItems={cityBikeNetworks.length}
-				itemsPerPage={ITEMS_PER_PAGE}
+				itemsPerPage={NETWORKS_PER_PAGE}
 				onPageChange={handlePageChange}
 			/>
 		</>

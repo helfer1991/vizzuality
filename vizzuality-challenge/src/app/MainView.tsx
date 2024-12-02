@@ -4,7 +4,7 @@ import { CityBikesNetworksSearch } from '@/components/search/city-bikes-networks
 import { Suspense } from 'react';
 import CityBikesNetworksLoadingState from '@/loading-states/city-bikes-networks-loading-state/city-bikes-networks-loading-state';
 import SearchLoadingState from '@/loading-states/search-loading-state/search-loading-state';
-import { Map } from '@/components/city-bikes-map/mapbox';
+import { Map } from '@/components/city-bike-map/mapbox';
 
 export function MainView() {
 	return (

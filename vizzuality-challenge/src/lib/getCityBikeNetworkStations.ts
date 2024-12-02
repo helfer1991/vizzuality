@@ -1,6 +1,5 @@
 import { CITYBIKES_API_URL } from './constants';
 import type { CityBikeNetworkStations } from '@/types';
-import { removeNumberingFromStationNames } from './utils';
 
 export const getCityBikeNetworkStations = async (
 	id: string
@@ -17,9 +16,6 @@ export const getCityBikeNetworkStations = async (
 		const data = (await response.json()) as {
 			network: CityBikeNetworkStations;
 		};
-		console.log('-----------');
-		console.log(removeNumberingFromStationNames(data.network));
-		console.log('-----------');
 
 		return data.network;
 	} catch (err) {
