@@ -1,35 +1,5 @@
 import type { CityBikeNetwork, Station } from '@/types';
-import mapboxgl from 'mapbox-gl';
-import { LngLatBounds, SourceSpecification } from 'mapbox-gl';
-import type { Feature, FeatureCollection, Point } from 'geojson';
-
-function isNetwork(item: CityBikeNetwork | Station): item is CityBikeNetwork {
-	return (item as CityBikeNetwork).location !== undefined;
-}
-
-export function getBounds(items: CityBikeNetwork[] | Station[]): LngLatBounds {
-	const coordinatesArr = items.map((item) => {
-		let lng: number;
-		let lat: number;
-
-		if (isNetwork(item)) {
-			lng = item.location.longitude;
-			lat = item.location.latitude;
-		} else {
-			lng = item.longitude;
-			lat = item.latitude;
-		}
-
-		return {
-			lng,
-			lat,
-		};
-	});
-
-	return coordinatesArr.reduce(function (bounds, coord) {
-		return bounds.extend(coord);
-	}, new mapboxgl.LngLatBounds(coordinatesArr[0], coordinatesArr[0]));
-}
+import type { Feature, Point } from 'geojson';
 
 export function getGeoJsonSource(
 	networks: CityBikeNetwork[]

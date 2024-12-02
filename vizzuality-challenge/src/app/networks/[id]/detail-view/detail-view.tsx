@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import DetailViewContent from './detail-view-content';
-import { Loader2 } from 'lucide-react';
+import DetailViewSkeleton from './loading';
 
 export type DetailViewProps = {
 	cityBikeNetworkId: string;
@@ -8,13 +8,7 @@ export type DetailViewProps = {
 
 export default function DetailView({ cityBikeNetworkId }: DetailViewProps) {
 	return (
-		<Suspense
-			fallback={
-				<div className='flex items-center justify-center h-screen'>
-					<Loader2 className='h-8 w-8 animate-spin' />
-				</div>
-			}
-		>
+		<Suspense fallback={<DetailViewSkeleton />}>
 			<DetailViewContent cityBikeNetworkId={cityBikeNetworkId} />
 		</Suspense>
 	);

@@ -1,10 +1,6 @@
 'use client';
 import { CityBikeNetworkContext } from '@/context/CityBikeNetworkContext';
-import {
-	getBounds,
-	getGeoJsonSource,
-	getGeoJsonSourceFromStations,
-} from './utils';
+import { getGeoJsonSource, getGeoJsonSourceFromStations } from './utils';
 import mapboxgl from 'mapbox-gl';
 import { useContext, useEffect, useRef } from 'react';
 import mapStyle from './style.json';

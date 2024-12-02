@@ -5,14 +5,20 @@ import { StationsMap } from '@/components/city-bike-map/mapbox';
 import { useNetworkStations } from './useNetworkStations';
 import type { DetailViewProps } from './detail-view';
 import CityBikeTable from '@/components/city-bike-table/city-bike-table';
+import DetailViewSkeleton from './loading';
+import TableSkeleton from './table-skeleton';
 
 export default function DetailViewContent({
 	cityBikeNetworkId,
 }: DetailViewProps) {
-	const { data, isError } = useNetworkStations(cityBikeNetworkId);
+	const { data, isLoading, isError } = useNetworkStations(cityBikeNetworkId);
 
 	if (isError || !data) {
 		return <div></div>;
+	}
+
+	if (isLoading) {
+		<DetailViewSkeleton />;
 	}
 
 	return (
@@ -23,7 +29,7 @@ export default function DetailViewContent({
 					company={data.company}
 					location={data.location}
 				/>
-				<Suspense fallback={<div>Loading...</div>}>
+				<Suspense fallback={<TableSkeleton />}>
 					<CityBikeTable stations={data.stations} />
 				</Suspense>
 			</aside>

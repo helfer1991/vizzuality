@@ -20,16 +20,20 @@ type CityBikeTableProps = {
 export default function CityBikeTable({ stations }: CityBikeTableProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
-
 	const currentPage = Number(searchParams.get('page')) || 1;
-	const startIndex = (currentPage - 1) * STATIONS_PER_PAGE;
-	const endIndex = startIndex + STATIONS_PER_PAGE;
 
 	const cityBikeTable = useReactTable({
-		data: stations.slice(startIndex, endIndex),
+		data: stations,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
+		state: {
+			pagination: {
+				pageIndex: currentPage - 1,
+				pageSize: STATIONS_PER_PAGE,
+			},
+		},
+		getPaginationRowModel: getPaginationRowModel(),
 	});
 
 	const handlePageChange = useCallback(
