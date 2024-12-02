@@ -1,5 +1,5 @@
 import { Suspense } from 'react';
-import DetailViewContent from './detail-view-content';
+import DetailViewContent from './detail-view-content/detail-view-content';
 import DetailViewSkeleton from './loading';
 
 export type DetailViewProps = {
