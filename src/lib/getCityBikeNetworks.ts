@@ -21,7 +21,7 @@ export const getCityBikeNetworks = async (): Promise<
 		};
 
 		return networks;
-	} catch (err) {
+	} catch {
 		throw new Error('Fetching of city bike networks failed');
 	}
 };

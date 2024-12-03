@@ -35,7 +35,6 @@ export default function DetailViewContent({
 					name={data.name}
 					company={data.company}
 					location={data.location}
-					stations={data.stations}
 				/>
 				<Suspense fallback={<TableSkeleton />}>
 					<CityBikeTable stations={removeNumberingFromStation(data.stations)} />

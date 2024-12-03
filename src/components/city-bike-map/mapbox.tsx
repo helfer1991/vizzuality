@@ -30,7 +30,7 @@ export function MapComponent({
 
 		map.current = new mapboxgl.Map({
 			container: mapContainer.current!,
-			style: mapStyle as any,
+			style: mapStyle as unknown as mapboxgl.Style,
 			center: stations ? getCenterCoordinates(stations) : [-8.6291, 41.1579],
 			zoom: stations ? 9 : 4,
 			projection: {

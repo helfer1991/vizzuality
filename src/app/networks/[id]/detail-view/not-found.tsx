@@ -10,7 +10,7 @@ export default function NotFound() {
 					<AlertCircle className='w-16 h-16 text-white/60 mx-auto' />
 					<h2 className='text-xl font-medium'>Network not found</h2>
 					<p className='text-white/80'>
-						The bike network you're looking for doesn't exist.
+						The bike network you&apos;re looking for doesn&apos;t exist.
 					</p>
 					<button
 						onClick={() => window.history.back()}

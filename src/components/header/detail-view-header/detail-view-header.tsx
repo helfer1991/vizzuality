@@ -9,14 +9,12 @@ type DetailViewHeaderProps = {
 	company: Array<string>;
 	name: string;
 	location: Location;
-	stations: Array<Station>;
 };
 
 export function DetailViewHeader({
 	name,
 	location,
 	company,
-	stations,
 }: DetailViewHeaderProps) {
 	return (
 		<header

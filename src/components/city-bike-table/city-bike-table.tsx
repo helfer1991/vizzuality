@@ -9,7 +9,7 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
-import { columns, removeNumberingFromStation } from './utils';
+import { columns } from './utils';
 import { PaginationControls } from '../pagination/pagination';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useScrollToTop } from '@/hooks/scroll-to-top';

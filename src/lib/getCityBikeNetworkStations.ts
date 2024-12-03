@@ -22,7 +22,7 @@ export const getCityBikeNetworkStations = async (
 		};
 
 		return data.network;
-	} catch (err) {
+	} catch {
 		throw new Error('Failed to fetch network stations');
 	}
 };
