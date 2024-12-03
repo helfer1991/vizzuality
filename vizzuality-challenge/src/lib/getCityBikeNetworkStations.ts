@@ -4,13 +4,17 @@ import type { CityBikeNetworkStations } from '@/types';
 export const getCityBikeNetworkStations = async (
 	id: string
 ): Promise<CityBikeNetworkStations> => {
-	// if (process.env.NODE_ENV === 'development') return mocknetworkStations.network
+	if (!id) {
+		throw new Error('Network ID is required');
+	}
 
 	try {
 		const response = await fetch(`${CITYBIKES_API_URL}/${id}`);
 
 		if (!response.ok) {
-			throw new Error('Failed to fetch network stations');
+			throw new Error(
+				`Failed to fetch network stations: ${response.status} ${response.statusText}`
+			);
 		}
 
 		const data = (await response.json()) as {
