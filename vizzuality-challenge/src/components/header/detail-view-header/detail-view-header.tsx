@@ -1,5 +1,5 @@
 import { getNormalizedCountryName } from '@/utils';
-import { Location } from '@/types';
+import { Location, Station } from '@/types';
 import { ArrowLeft, BriefcaseBusiness, MapPin } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,12 +9,14 @@ type DetailViewHeaderProps = {
 	company: Array<string>;
 	name: string;
 	location: Location;
+	stations: Array<Station>;
 };
 
 export function DetailViewHeader({
 	name,
 	location,
 	company,
+	stations,
 }: DetailViewHeaderProps) {
 	return (
 		<header
@@ -49,9 +51,7 @@ export function DetailViewHeader({
 						aria-hidden='true'
 					/>
 				</Link>
-
 				<h1 className='font-bold text-3xl leading-8 mb-2'>{name}</h1>
-
 				<div className='text-toreabay-100 text-base'>
 					<p className='flex items-center gap-2 mb-2'>
 						<MapPin

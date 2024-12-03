@@ -54,6 +54,9 @@ export const columns: ColumnDef<Station, unknown>[] = [
 				label='free bikes'
 			/>
 		),
+		cell: (info) => (
+			<span className='font-bold'>{info.getValue() as number}</span>
+		),
 	},
 	{
 		accessorKey: 'empty_slots',
@@ -63,5 +66,20 @@ export const columns: ColumnDef<Station, unknown>[] = [
 				label='empty slots'
 			/>
 		),
+		cell: (info) => (
+			<span className='font-bold'>{info.getValue() as number}</span>
+		),
 	},
 ];
+
+export const removeNumberingFromStation = (
+	stations: Array<Station>
+): Array<Station> => {
+	return stations.map((station: Station) => {
+		const nameParts = station.name.split(' - ');
+		return {
+			...station,
+			name: nameParts[1]?.trim() || station.name,
+		};
+	});
+};

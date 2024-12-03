@@ -27,7 +27,7 @@ export function CityBikeNetworks() {
 	);
 
 	return (
-		<>
+		<section>
 			<ul>
 				{cityBikeNetworks.slice(startIndex, endIndex).map((cityBikeNetwork) => (
 					<li key={cityBikeNetwork.id}>
@@ -41,6 +41,6 @@ export function CityBikeNetworks() {
 				itemsPerPage={NETWORKS_PER_PAGE}
 				onPageChange={handlePageChange}
 			/>
-		</>
+		</section>
 	);
 }

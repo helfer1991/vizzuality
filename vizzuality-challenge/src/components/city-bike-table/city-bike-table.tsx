@@ -9,10 +9,11 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from '@tanstack/react-table';
-import { columns } from './utils';
+import { columns, removeNumberingFromStation } from './utils';
 import { PaginationControls } from '../pagination/pagination';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useScrollToTop } from '@/hooks/scroll-to-top';
+import CityBikeTableStationsCount from './city-bike-table-stations-count';
 
 type CityBikeTableProps = {
 	stations: Array<Station>;
@@ -25,7 +26,7 @@ export default function CityBikeTable({ stations }: CityBikeTableProps) {
 	useScrollToTop(currentPage);
 
 	const cityBikeTable = useReactTable({
-		data: stations,
+		data: removeNumberingFromStation(stations),
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
@@ -48,7 +49,10 @@ export default function CityBikeTable({ stations }: CityBikeTableProps) {
 	);
 
 	return (
-		<div className='p-2'>
+		<section className='ml-10 mr-10'>
+			{stations && stations.length > 0 && (
+				<CityBikeTableStationsCount count={stations.length} />
+			)}
 			<table className='w-full'>
 				<thead>
 					{cityBikeTable.getHeaderGroups().map((headerGroup) => (
@@ -90,12 +94,14 @@ export default function CityBikeTable({ stations }: CityBikeTableProps) {
 					))}
 				</tbody>
 			</table>
-			<PaginationControls
-				currentPage={currentPage}
-				totalItems={stations.length}
-				itemsPerPage={STATIONS_PER_PAGE}
-				onPageChange={handlePageChange}
-			/>
-		</div>
+			{stations.length > STATIONS_PER_PAGE && (
+				<PaginationControls
+					currentPage={currentPage}
+					totalItems={stations.length}
+					itemsPerPage={STATIONS_PER_PAGE}
+					onPageChange={handlePageChange}
+				/>
+			)}
+		</section>
 	);
 }
