@@ -2,11 +2,11 @@
 import { Suspense } from 'react';
 import { DetailViewHeader } from '@/components/header/detail-view-header/detail-view-header';
 import { StationsMap } from '@/components/city-bike-map/mapbox';
-import { useNetworkStations } from '../../../../app/networks/[id]/detail-view/useNetworkStations';
-import type { DetailViewProps } from '../../../../app/networks/[id]/detail-view/detail-view';
+import { useNetworkStations } from '../../../app/networks/[id]/detail-view/useNetworkStations';
+import type { DetailViewProps } from '../../../app/networks/[id]/detail-view/detail-view';
 import CityBikeTable from '@/components/city-bike-table/city-bike-table';
-import DetailViewSkeleton from '../../../../app/networks/[id]/detail-view/loading';
-import TableSkeleton from '../../../../app/networks/[id]/detail-view/table-skeleton';
+import DetailViewSkeleton from '../../../app/networks/[id]/detail-view/loading';
+import TableSkeleton from '../../../app/networks/[id]/detail-view/table-skeleton';
 import DetailViewContentError from './detail-view-content-error';
 import DetailViewContentEmpty from './detail-view-content-empty';
 import { removeNumberingFromStation } from '@/components/city-bike-table/utils';
