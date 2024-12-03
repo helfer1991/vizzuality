@@ -1,4 +1,4 @@
-import { getCompaniesCount, getNormalizedCountryName } from '@/ui/utils';
+import { getCompaniesCount, getNormalizedCountryName } from '@/utils';
 import Link from 'next/link';
 import CompanyInfo from './company-info/company-info';
 import LocationInfo from './location-info/location-info';

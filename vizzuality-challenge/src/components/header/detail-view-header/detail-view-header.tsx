@@ -1,4 +1,4 @@
-import { getNormalizedCountryName } from '@/ui/utils';
+import { getNormalizedCountryName } from '@/utils';
 import { Location } from '@/types';
 import { ArrowLeft, BriefcaseBusiness, MapPin } from 'lucide-react';
 import Image from 'next/image';

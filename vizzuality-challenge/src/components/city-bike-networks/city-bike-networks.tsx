@@ -1,7 +1,7 @@
 'use client';
 import { CityBikeNetworkContext } from '@/context/CityBikeNetworkContext';
 import { useContext, useCallback } from 'react';
-import { CityBikeNetworkCard } from '@/ui/city-bike-network-card/city-bike-network-card';
+import { CityBikeNetworkCard } from '@/components/ui/city-bike-network-card/city-bike-network-card';
 import { PaginationControls } from '../pagination/pagination';
 import { NETWORKS_PER_PAGE } from './constants';
 import { useRouter, useSearchParams } from 'next/navigation';

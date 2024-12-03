@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react';
-import { Input } from '@/ui/input';
+import { Input } from '@/components/ui/input';
 import CountriesCombobox from '../countries-combobox/countries-combobox';
 import type { CountryComboboxItem } from '@/types';
 
