@@ -6,6 +6,7 @@ import { useContext, useEffect, useRef } from 'react';
 import mapStyle from './style.json';
 import { CityBikeNetwork, Station } from '@/types';
 import { CustomZoomControl, getCenterCoordinates } from './map-zoom';
+import { LocationControl } from './location-control';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
@@ -76,6 +77,9 @@ export function MapComponent({
 					map.current?.getCanvas().style.setProperty('cursor', '');
 				});
 			}
+
+			map.current?.addControl(new LocationControl(map.current), 'top-left');
+
 			const zoomControl = new CustomZoomControl(map.current!);
 			map.current?.addControl(zoomControl, 'top-right');
 		});

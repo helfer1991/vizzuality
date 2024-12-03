@@ -20,6 +20,7 @@ class CustomZoomControl implements mapboxgl.IControl {
         border-radius: 12px !important;
         box-shadow: 0 0 0 2px rgba(0,0,0,.1) !important;
         border: none !important;
+        margin: 32px 24px 0 0 !important;
       }
 
       .mapboxgl-ctrl-group > button {
@@ -30,7 +31,6 @@ class CustomZoomControl implements mapboxgl.IControl {
         outline: none !important;
         border: 0 !important;
         box-sizing: border-box !important;
-        background-color: transparent !important;
         cursor: pointer !important;
         text-align: center !important;
         -webkit-font-smoothing: antialiased !important;
@@ -52,13 +52,11 @@ class CustomZoomControl implements mapboxgl.IControl {
       }
 
 
-      /* Hide default icon content */
       .mapboxgl-ctrl-zoom-in .mapboxgl-ctrl-icon,
       .mapboxgl-ctrl-zoom-out .mapboxgl-ctrl-icon {
         background-image: none !important;
       }
 
-      /* Add custom content */
       .mapboxgl-ctrl-zoom-in::after {
         content: '+' !important;
         font-size: 18px !important;
