@@ -9,6 +9,7 @@ import DetailViewSkeleton from '../../../../app/networks/[id]/detail-view/loadin
 import TableSkeleton from '../../../../app/networks/[id]/detail-view/table-skeleton';
 import DetailViewContentError from './detail-view-content-error';
 import DetailViewContentEmpty from './detail-view-content-empty';
+import { removeNumberingFromStation } from '@/components/city-bike-table/utils';
 
 export default function DetailViewContent({
 	cityBikeNetworkId,
@@ -37,7 +38,7 @@ export default function DetailViewContent({
 					stations={data.stations}
 				/>
 				<Suspense fallback={<TableSkeleton />}>
-					<CityBikeTable stations={data.stations} />
+					<CityBikeTable stations={removeNumberingFromStation(data.stations)} />
 				</Suspense>
 			</aside>
 			<StationsMap stations={data.stations} />

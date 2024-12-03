@@ -26,7 +26,7 @@ export default function CityBikeTable({ stations }: CityBikeTableProps) {
 	useScrollToTop(currentPage);
 
 	const cityBikeTable = useReactTable({
-		data: removeNumberingFromStation(stations),
+		data: stations,
 		columns,
 		getCoreRowModel: getCoreRowModel(),
 		getSortedRowModel: getSortedRowModel(),
