@@ -1,4 +1,4 @@
-import { MainView } from './MainView';
+import { MainView } from './main-view';
 import { getCityBikeNetworks } from '@/lib/getCityBikeNetworks';
 import { CityBikeNetworkProvider } from '@/context/CityBikeNetworkContext';
 

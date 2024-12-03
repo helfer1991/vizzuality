@@ -15,7 +15,7 @@ export class LocationControl implements mapboxgl.IControl {
         box-shadow: none !important;
         height: 40px !important;
         padding: 0 !important;
-          margin: 32px 0 0 24px !important;
+        margin: 32px 0 0 32px !important;
         width: 113px !important;
       }
 

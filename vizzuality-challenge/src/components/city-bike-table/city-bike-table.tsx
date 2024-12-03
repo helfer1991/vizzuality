@@ -12,6 +12,7 @@ import {
 import { columns } from './utils';
 import { PaginationControls } from '../pagination/pagination';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { useScrollToTop } from '@/hooks/scroll-to-top';
 
 type CityBikeTableProps = {
 	stations: Array<Station>;
@@ -21,6 +22,7 @@ export default function CityBikeTable({ stations }: CityBikeTableProps) {
 	const router = useRouter();
 	const searchParams = useSearchParams();
 	const currentPage = Number(searchParams.get('page')) || 1;
+	useScrollToTop(currentPage);
 
 	const cityBikeTable = useReactTable({
 		data: stations,
