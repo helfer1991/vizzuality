@@ -130,20 +130,17 @@ export function StationsMap({ stations }: { stations: Station[] }) {
 			return;
 		}
 
+		const coordinates = feature.geometry.coordinates.slice() as [
+			number,
+			number
+		];
+		const { name, freeBikes, emptySlots } = feature.properties || {};
+
 		const existingPopups = document.getElementsByClassName('mapboxgl-popup');
 		if (existingPopups.length) {
 			existingPopups[0].remove();
 		}
 
-		const coordinates = feature.geometry.coordinates.slice() as [
-			number,
-			number
-		];
-		const name = 'Name';
-		const freeBikes = 4;
-		const emptySlots = 0;
-
-		// Create styled popup content
 		const popupContent = `
       <div class="p-4 min-w-[200px]">
         <h3 class="text-sm font-medium mb-3">
@@ -168,7 +165,6 @@ export function StationsMap({ stations }: { stations: Station[] }) {
       </div>
     `;
 
-		// Add custom popup styles
 		const style = document.createElement('style');
 		style.textContent = `
       .mapboxgl-popup-content {
@@ -185,7 +181,6 @@ export function StationsMap({ stations }: { stations: Station[] }) {
     `;
 		document.head.appendChild(style);
 
-		// Create and add popup
 		new mapboxgl.Popup({
 			closeButton: false,
 			closeOnClick: true,
