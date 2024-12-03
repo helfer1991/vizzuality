@@ -1,1 +1,1 @@
-export const CITYBIKES_API_URL = 'http://api.citybik.es/v2/networks';
+export const CITYBIKES_API_URL = 'https://api.citybik.es/v2/networks';
